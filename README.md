@@ -4,12 +4,11 @@ This project demonstrates the setup and basic usage of Google ADK (Agent Develop
 
 ## Official Documentation
 
-- **Google ADK Documentation**: https://ai.google.dev/docs/adk
-- **Google ADK Python SDK**: https://ai.google.dev/docs/adk/python
-- **Google ADK Quickstart**: https://ai.google.dev/docs/adk/quickstart
-- **Google ADK API Reference**: https://ai.google.dev/docs/adk/reference
-- **Google ADK Examples**: https://ai.google.dev/docs/adk/examples
-- **Google AI Studio**: https://makersuite.google.com/app/apikey
+- **Google ADK Documentation**: https://google.github.io/adk-docs/
+- **Google ADK Python SDK**: https://google.github.io/adk-docs/get-started/
+- **Google ADK Quickstart**: https://google.github.io/adk-docs/get-started/quickstart/
+- **Google ADK API Reference**: https://google.github.io/adk-docs/reference/python/
+- **Google ADK Examples**: https://github.com/google/adk-samples
 
 ## Setup
 
@@ -38,30 +37,45 @@ This project demonstrates the setup and basic usage of Google ADK (Agent Develop
 
 ```
 adk_tutorial/
-├── pyproject.toml          # Poetry configuration
-├── test_adk.py            # Test script to verify installation
-├── example.py             # Basic usage example
-├── setup_google_adk.py    # Setup script for API key configuration
-├── test_auth.py           # Authentication test script
-├── .env                   # Environment variables (API keys)
-└── README.md              # This file
+├── adk_tutorial/
+│   ├── 01_hello_world.ipynb
+│   ├── 02_multitool_agent.ipynb
+│   ├── 03_agent_team.ipynb
+│   ├── agent_call_utils.py
+│   └── tools/
+│       ├── __init__.py
+│       ├── get_greetings.py
+│       └── get_weather.py
+├── archive/
+│   ├── setup_google_adk.py
+│   ├── setup_litellm.py
+│   ├── simple_google_adk.py
+│   ├── test_adk.py
+│   └── test_auth.py
+├── .gitignore
+├── DOCUMENTATION.md
+├── example.py
+├── poetry.lock
+├── pyproject.toml
+└── README.md
 ```
 
 ## Usage
 
 ### Test Installation
 ```bash
-poetry run python test_adk.py
+# No direct test script, run notebooks instead
 ```
 
 ### Run Example
 ```bash
-poetry run python example.py
+poetry run jupyter lab
+# Then open and run 01_hello_world.ipynb, etc.
 ```
 
 ### Setup Authentication
 ```bash
-poetry run python setup_google_adk.py
+# Authentication is handled within the notebooks
 ```
 
 ## Dependencies
@@ -113,7 +127,7 @@ poetry run jupyter lab
 
 For the most current and accurate information, always refer to the official Google ADK documentation:
 
-- **Main Documentation**: https://ai.google.dev/docs/adk
-- **Python SDK**: https://ai.google.dev/docs/adk/python
-- **API Reference**: https://ai.google.dev/docs/adk/reference
-- **Examples**: https://ai.google.dev/docs/adk/examples 
+- **Main Documentation**: https://google.github.io/adk-docs/
+- **Python SDK**: https://google.github.io/adk-docs/get-started/
+- **API Reference**: https://google.github.io/adk-docs/reference/python/
+- **Examples**: https://github.com/google/adk-samples 
