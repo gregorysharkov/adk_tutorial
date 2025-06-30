@@ -6,6 +6,9 @@ import json
 import time
 from typing import List, Dict, Any
 from google.adk.tools import google_search
+import asyncio
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
 
 # Load environment variables
 load_dotenv()
@@ -36,31 +39,73 @@ class Agent:
         self.status = "idle"
         self.last_updated = time.time()
         self.tools = [google_search] if use_search and model.startswith("gemini-2.0") else []
-        
-    def process_task(self, task: str, context: str = "") -> str:
-        """Process a task and return the result"""
+        self.runner = None
+        self.session_service = None
+        self.session = None
+        if self.tools:
+            self.session_service = InMemorySessionService()
+            # Use a unique session id per agent
+            self.session_id = f"session_{self.name}_{int(time.time())}"
+            self.runner = Runner(agent=self.get_adk_agent(), app_name="adk_app", session_service=self.session_service)
+            # Session will be created on first use
+
+    def get_adk_agent(self):
+        # Return a new ADK Agent instance with the same config
+        from google.adk.agents import Agent as ADKAgent
+        return ADKAgent(
+            name=self.name,
+            model=self.model,
+            description=self.role,
+            instruction=self.role,
+            tools=self.tools
+        )
+
+    async def process_task_async(self, task: str, context: str = "") -> str:
+        self.status = "working"
+        self.last_updated = time.time()
+        prompt = f"""
+        You are {self.name}, a {self.role}.
+        Task: {task}
+        Context: {context}
+        Please provide a detailed response based on your role and expertise.
+        """
+        from google.genai import types
         try:
-            self.status = "working"
-            self.last_updated = time.time()
-            prompt = f"""
-            You are {self.name}, a {self.role}.
-            
-            Task: {task}
-            Context: {context}
-            
-            Please provide a detailed response based on your role and expertise.
-            """
-            
-            response = self.model_instance.generate_content(prompt)
-            self.output = response.text
-            self.status = "completed"
-            self.last_updated = time.time()
-            return self.output
+            if self.tools:
+                # Use ADK runner/session for tool-enabled agents
+                if not self.session:
+                    self.session = await self.session_service.create_session(app_name="adk_app", user_id="user", session_id=self.session_id)
+                content = types.Content(role='user', parts=[types.Part(text=prompt)])
+                events = self.runner.run_async(user_id="user", session_id=self.session_id, new_message=content)
+                result = ""
+                async for event in events:
+                    if event.is_final_response():
+                        result = event.content.parts[0].text
+                        break
+                self.output = result
+                self.status = "completed"
+                self.last_updated = time.time()
+                return result
+            else:
+                # Fallback to plain LLM
+                response = self.model_instance.generate_content(prompt)
+                self.output = response.text
+                self.status = "completed"
+                self.last_updated = time.time()
+                return self.output
         except Exception as e:
             self.status = "error"
             self.output = f"Error: {str(e)}"
             self.last_updated = time.time()
             return self.output
+
+    def process_task(self, task: str, context: str = "") -> str:
+        # Synchronous wrapper for Streamlit compatibility
+        if self.tools:
+            # Run async in Streamlit
+            return asyncio.run(self.process_task_async(task, context))
+        else:
+            return self.process_task_async(task, context)
 
     def to_dict(self):
         return {"name": self.name, "role": self.role, "model": self.model, "use_search": self.use_search}
