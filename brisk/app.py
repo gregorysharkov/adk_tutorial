@@ -100,12 +100,29 @@ class Agent:
             return self.output
 
     def process_task(self, task: str, context: str = "") -> str:
-        # Synchronous wrapper for Streamlit compatibility
         if self.tools:
-            # Run async in Streamlit
             return asyncio.run(self.process_task_async(task, context))
         else:
-            return self.process_task_async(task, context)
+            # Fallback to plain LLM (synchronous)
+            self.status = "working"
+            self.last_updated = time.time()
+            prompt = f"""
+            You are {self.name}, a {self.role}.
+            Task: {task}
+            Context: {context}
+            Please provide a detailed response based on your role and expertise.
+            """
+            try:
+                response = self.model_instance.generate_content(prompt)
+                self.output = response.text
+                self.status = "completed"
+                self.last_updated = time.time()
+                return self.output
+            except Exception as e:
+                self.status = "error"
+                self.output = f"Error: {str(e)}"
+                self.last_updated = time.time()
+                return self.output
 
     def to_dict(self):
         return {"name": self.name, "role": self.role, "model": self.model, "use_search": self.use_search}
@@ -154,41 +171,21 @@ def main():
     st.title("🤖 Multi-Agent ADK Application")
     st.markdown("---")
     
+    # Add custom CSS for smaller headers
+    st.markdown("""
+        <style>
+        .small-header { font-size: 1.3rem !important; font-weight: 700; margin-bottom: 0.5rem; }
+        .small-subheader { font-size: 1.05rem !important; font-weight: 600; margin-bottom: 0.3rem; }
+        </style>
+    """, unsafe_allow_html=True)
+    
     # Three-column layout
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col1:
-        st.header("🎯 Agent Control Panel")
-        
-        # Agent creation section
-        st.subheader("Create New Agent")
-        with st.form("create_agent"):
-            agent_name = st.text_input("Agent Name", placeholder="e.g., Research Agent")
-            agent_role = st.text_area("Agent Role", placeholder="Describe the agent's role and expertise")
-            submitted = st.form_submit_button("Create Agent")
-        # Visual grouping for model and search checkbox
-        with st.container():
-            st.markdown("**Agent Options**")
-            agent_model = st.selectbox("Model", ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro", "gemini-2.0-flash"], key="agent_model_select")
-            search_checkbox_disabled = agent_model.strip() != "gemini-2.0-flash"
-            search_tooltip = "Enable Google Search grounding (requires gemini-2.0-flash)"
-            use_search = st.checkbox(
-                "Enable Google Search grounding",
-                value=False,
-                disabled=search_checkbox_disabled,
-                help=search_tooltip,
-                key="search_checkbox"
-            )
-            # Handle agent creation after all fields are set
-        if submitted:
-            if agent_name and agent_role:
-                create_agent(agent_name, agent_role, agent_model, use_search)
-                st.success(f"Agent '{agent_name}' created successfully!")
-            else:
-                st.error("Please provide both name and role for the agent")
-        
-        # Task assignment section
-        st.subheader("Assign Task")
+        st.markdown('<div class="small-header">🎯 Agent Control Panel</div>', unsafe_allow_html=True)
+        # 1. Assign Task section
+        st.markdown('<div class="small-subheader">Assign Task</div>', unsafe_allow_html=True)
         if st.session_state.agents:
             with st.form("assign_task"):
                 agent_names = ["All agents"] + [agent.name for agent in st.session_state.agents]
@@ -204,7 +201,6 @@ def main():
                     "Additional Context (Optional)",
                     placeholder="Any additional context or information"
                 )
-                
                 if st.form_submit_button("Run Task"):
                     if task_description:
                         if selected_agent == "All agents":
@@ -224,9 +220,8 @@ def main():
                         st.error("Please provide a task description")
         else:
             st.info("Create an agent first to assign tasks")
-        
-        # Agent management
-        st.subheader("Agent Management")
+        # 2. Agent Management section
+        st.markdown('<div class="small-subheader">Agent Management</div>', unsafe_allow_html=True)
         if st.session_state.agents:
             for i, agent in enumerate(st.session_state.agents):
                 with st.expander(f"{agent.name} ({agent.status})"):
@@ -240,9 +235,33 @@ def main():
                         st.rerun()
         else:
             st.info("No agents created yet")
+        # 3. Create New Agent section
+        st.markdown('<div class="small-subheader">Create New Agent</div>', unsafe_allow_html=True)
+        with st.form("create_agent"):
+            agent_name = st.text_input("Agent Name", placeholder="e.g., Research Agent")
+            agent_role = st.text_area("Agent Role", placeholder="Describe the agent's role and expertise")
+            submitted = st.form_submit_button("Create Agent")
+        with st.container():
+            st.markdown("**Agent Options**")
+            agent_model = st.selectbox("Model", ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro", "gemini-2.0-flash"], key="agent_model_select")
+            search_checkbox_disabled = agent_model.strip() != "gemini-2.0-flash"
+            search_tooltip = "Enable Google Search grounding (requires gemini-2.0-flash)"
+            use_search = st.checkbox(
+                "Enable Google Search grounding",
+                value=False,
+                disabled=search_checkbox_disabled,
+                help=search_tooltip,
+                key="search_checkbox"
+            )
+        if submitted:
+            if agent_name and agent_role:
+                create_agent(agent_name, agent_role, agent_model, use_search)
+                st.success(f"Agent '{agent_name}' created successfully!")
+            else:
+                st.error("Please provide both name and role for the agent")
     
     with col2:
-        st.header("📊 Agent Outputs")
+        st.markdown('<div class="small-header">📊 Agent Outputs</div>', unsafe_allow_html=True)
         
         if st.session_state.agents:
             for agent in st.session_state.agents:
@@ -268,9 +287,30 @@ def main():
             st.info("Create agents in the left panel to see their outputs here")
     
     with col3:
-        st.header("📝 Report Panel")
-        
-        # Report generation
+        st.markdown('<div class="small-header">📝 Report Panel</div>', unsafe_allow_html=True)
+        # Auto-generate report if all agents are finished and report is empty
+        if (
+            st.session_state.agents
+            and all(agent.status in ["completed", "error"] for agent in st.session_state.agents)
+            and not st.session_state.report
+        ):
+            completed_agents = [agent for agent in st.session_state.agents if agent.status == "completed"]
+            if completed_agents:
+                report_prompt = f"""
+                Generate a comprehensive report based on the following agent outputs:
+                
+                {chr(10).join([f"Agent: {agent.name} ({agent.role}){chr(10)}Output: {st.session_state.agent_outputs.get(agent.name, agent.output)}" for agent in completed_agents])}
+                
+                Please provide a well-structured report that summarizes the findings and insights from all agents.
+                """
+                try:
+                    model = genai.GenerativeModel("gemini-1.5-flash")
+                    response = model.generate_content(report_prompt)
+                    st.session_state.report = response.text
+                    st.success("Report generated automatically!")
+                except Exception as e:
+                    st.error(f"Error generating report: {str(e)}")
+        # Report generation (manual)
         if st.session_state.agents and any(agent.status == "completed" for agent in st.session_state.agents):
             if st.button("Generate Report"):
                 completed_agents = [agent for agent in st.session_state.agents if agent.status == "completed"]
@@ -282,7 +322,6 @@ def main():
                     
                     Please provide a well-structured report that summarizes the findings and insights from all agents.
                     """
-                    
                     try:
                         model = genai.GenerativeModel("gemini-1.5-flash")
                         response = model.generate_content(report_prompt)
