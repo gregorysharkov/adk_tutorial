@@ -17,15 +17,7 @@ else:
     st.error("Please set GOOGLE_API_KEY in your .env file")
     st.stop()
 
-# Initialize session state
-if 'agents' not in st.session_state:
-    st.session_state.agents = []
-if 'agent_outputs' not in st.session_state:
-    st.session_state.agent_outputs = {}
-if 'report' not in st.session_state:
-    st.session_state.report = ""
-if 'pending_tasks' not in st.session_state:
-    st.session_state.pending_tasks = []
+AGENTS_FILE = "agents.json"
 
 class Agent:
     def __init__(self, name: str, role: str, model: str = "gemini-1.5-flash"):
@@ -62,11 +54,40 @@ class Agent:
             self.last_updated = time.time()
             return self.output
 
+    def to_dict(self):
+        return {"name": self.name, "role": self.role, "model": self.model}
+
+    @staticmethod
+    def from_dict(data):
+        return Agent(data["name"], data["role"], data.get("model", "gemini-1.5-flash"))
+
+def save_agents():
+    with open(AGENTS_FILE, "w") as f:
+        json.dump([agent.to_dict() for agent in st.session_state.agents], f)
+
+def load_agents():
+    if os.path.exists(AGENTS_FILE):
+        with open(AGENTS_FILE, "r") as f:
+            agent_dicts = json.load(f)
+            return [Agent.from_dict(a) for a in agent_dicts]
+    return []
+
+# Initialize session state
+if 'agents' not in st.session_state:
+    st.session_state.agents = load_agents()
+if 'agent_outputs' not in st.session_state:
+    st.session_state.agent_outputs = {}
+if 'report' not in st.session_state:
+    st.session_state.report = ""
+if 'pending_tasks' not in st.session_state:
+    st.session_state.pending_tasks = []
+
 def create_agent(name: str, role: str, model: str = "gemini-1.5-flash") -> Agent:
     """Create a new agent"""
     agent = Agent(name, role, model)
     st.session_state.agents.append(agent)
     st.session_state.agent_outputs[agent.name] = ""
+    save_agents()
     return agent
 
 def main():
@@ -143,6 +164,7 @@ def main():
                         st.session_state.agents.pop(i)
                         if agent.name in st.session_state.agent_outputs:
                             del st.session_state.agent_outputs[agent.name]
+                        save_agents()
                         st.rerun()
         else:
             st.info("No agents created yet")
