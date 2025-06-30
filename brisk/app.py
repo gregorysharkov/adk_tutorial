@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import json
 import time
 from typing import List, Dict, Any
+from google.adk.tools import google_search
 
 # Load environment variables
 load_dotenv()
@@ -19,15 +20,22 @@ else:
 
 AGENTS_FILE = "agents.json"
 
+try:
+    ADK_AVAILABLE = True
+except ImportError:
+    ADK_AVAILABLE = False
+
 class Agent:
-    def __init__(self, name: str, role: str, model: str = "gemini-1.5-flash"):
+    def __init__(self, name: str, role: str, model: str = "gemini-1.5-flash", use_search: bool = False):
         self.name = name
         self.role = role
         self.model = model
+        self.use_search = use_search
         self.model_instance = genai.GenerativeModel(model)
         self.output = ""
         self.status = "idle"
         self.last_updated = time.time()
+        self.tools = [google_search] if use_search and model.startswith("gemini-2.0") else []
         
     def process_task(self, task: str, context: str = "") -> str:
         """Process a task and return the result"""
@@ -55,11 +63,11 @@ class Agent:
             return self.output
 
     def to_dict(self):
-        return {"name": self.name, "role": self.role, "model": self.model}
+        return {"name": self.name, "role": self.role, "model": self.model, "use_search": self.use_search}
 
     @staticmethod
     def from_dict(data):
-        return Agent(data["name"], data["role"], data.get("model", "gemini-1.5-flash"))
+        return Agent(data["name"], data["role"], data.get("model", "gemini-1.5-flash"), data.get("use_search", False))
 
 def save_agents():
     with open(AGENTS_FILE, "w") as f:
@@ -82,9 +90,9 @@ if 'report' not in st.session_state:
 if 'pending_tasks' not in st.session_state:
     st.session_state.pending_tasks = []
 
-def create_agent(name: str, role: str, model: str = "gemini-1.5-flash") -> Agent:
+def create_agent(name: str, role: str, model: str = "gemini-1.5-flash", use_search: bool = False) -> Agent:
     """Create a new agent"""
-    agent = Agent(name, role, model)
+    agent = Agent(name, role, model, use_search)
     st.session_state.agents.append(agent)
     st.session_state.agent_outputs[agent.name] = ""
     save_agents()
@@ -112,14 +120,27 @@ def main():
         with st.form("create_agent"):
             agent_name = st.text_input("Agent Name", placeholder="e.g., Research Agent")
             agent_role = st.text_area("Agent Role", placeholder="Describe the agent's role and expertise")
-            agent_model = st.selectbox("Model", ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"])
-            
-            if st.form_submit_button("Create Agent"):
-                if agent_name and agent_role:
-                    create_agent(agent_name, agent_role, agent_model)
-                    st.success(f"Agent '{agent_name}' created successfully!")
-                else:
-                    st.error("Please provide both name and role for the agent")
+            submitted = st.form_submit_button("Create Agent")
+        # Visual grouping for model and search checkbox
+        with st.container():
+            st.markdown("**Agent Options**")
+            agent_model = st.selectbox("Model", ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro", "gemini-2.0-flash"], key="agent_model_select")
+            search_checkbox_disabled = agent_model.strip() != "gemini-2.0-flash"
+            search_tooltip = "Enable Google Search grounding (requires gemini-2.0-flash)"
+            use_search = st.checkbox(
+                "Enable Google Search grounding",
+                value=False,
+                disabled=search_checkbox_disabled,
+                help=search_tooltip,
+                key="search_checkbox"
+            )
+            # Handle agent creation after all fields are set
+        if submitted:
+            if agent_name and agent_role:
+                create_agent(agent_name, agent_role, agent_model, use_search)
+                st.success(f"Agent '{agent_name}' created successfully!")
+            else:
+                st.error("Please provide both name and role for the agent")
         
         # Task assignment section
         st.subheader("Assign Task")
