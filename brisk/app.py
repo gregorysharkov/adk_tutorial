@@ -199,7 +199,9 @@ def main():
         # Report display
         st.subheader("Current Report")
         if st.session_state.report:
-            st.text_area("Report", st.session_state.report, height=400, disabled=True)
+            new_report = st.text_area("Report", st.session_state.report, height=400)
+            if new_report != st.session_state.report:
+                st.session_state.report = new_report
             if st.button("Clear Report"):
                 st.session_state.report = ""
                 st.rerun()
