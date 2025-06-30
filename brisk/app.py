@@ -125,13 +125,14 @@ def main():
         st.subheader("Assign Task")
         if st.session_state.agents:
             with st.form("assign_task"):
+                agent_names = ["All agents"] + [agent.name for agent in st.session_state.agents]
                 selected_agent = st.selectbox(
                     "Select Agent",
-                    options=[agent.name for agent in st.session_state.agents]
+                    options=agent_names
                 )
                 task_description = st.text_area(
                     "Task Description",
-                    placeholder="Describe the task for the selected agent"
+                    placeholder="Describe the task for the selected agent(s)"
                 )
                 context = st.text_area(
                     "Additional Context (Optional)",
@@ -140,14 +141,19 @@ def main():
                 
                 if st.form_submit_button("Run Task"):
                     if task_description:
-                        agent = next((a for a in st.session_state.agents if a.name == selected_agent), None)
-                        if agent:
-                            # Process task immediately (no threading)
-                            result = agent.process_task(task_description, context)
-                            st.session_state.agent_outputs[agent.name] = result
-                            st.success(f"Task completed for {selected_agent}")
+                        if selected_agent == "All agents":
+                            for agent in st.session_state.agents:
+                                result = agent.process_task(task_description, context)
+                                st.session_state.agent_outputs[agent.name] = result
+                            st.success("Task completed for all agents")
                         else:
-                            st.error("Agent not found")
+                            agent = next((a for a in st.session_state.agents if a.name == selected_agent), None)
+                            if agent:
+                                result = agent.process_task(task_description, context)
+                                st.session_state.agent_outputs[agent.name] = result
+                                st.success(f"Task completed for {selected_agent}")
+                            else:
+                                st.error("Agent not found")
                     else:
                         st.error("Please provide a task description")
         else:
