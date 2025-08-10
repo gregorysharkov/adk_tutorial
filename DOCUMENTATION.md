@@ -61,8 +61,10 @@ Google ADK (Agent Development Kit) is a framework for building AI agents that ca
 2. **Model Selection**: Choose appropriate AI models for your use case
 3. **Tool Development**: Create or use existing tools for agent capabilities
 4. **Agent Creation**: Build agents that combine models and tools
-5. **Testing**: Test agents with various scenarios
-6. **Deployment**: Deploy agents for production use
+5. **RAG (V003)**: Ingest company documents into a vector store; configure retriever and prompting
+6. **Deep Planning (V004)**: Configure planner and dialogue manager; define budgets and policies
+7. **Testing**: Test agents with various scenarios
+8. **Deployment**: Deploy agents for production use
 
 ## Best Practices
 
@@ -71,6 +73,74 @@ Google ADK (Agent Development Kit) is a framework for building AI agents that ca
 - Test with different models to find the best fit for your use case
 - Implement proper error handling for tool calls
 - Monitor agent performance and usage
+ - For RAG, pin embedding model versions and log index versions
+
+## Setup Checklist
+
+- Install dependencies (see `requirements.txt` / `pyproject.toml`).
+- Set environment variables: `GOOGLE_API_KEY`, optional search API creds, `MLFLOW_TRACKING_URI`.
+- For V003 (RAG): set `RAG_INDEX_BACKEND`, `RAG_INDEX_DIR`, `EMBEDDING_MODEL`.
+- Verify CLI: run V001 interactive, V002 with search, V003 with `--rag`.
+
+## Running Modes (Examples)
+
+- V001 interactive:
+  - `python -m app --model <model> --company "<name>" --question "<q>"`
+- V002 search-enabled:
+  - `python -m app --model <model> --company "<name>" --question "<q>" --steps 8`
+- V003 RAG ingestion:
+  - `python -m app --ingest --source-dir ./data/<company>/ --company "<name>" --chunk-size 800 --chunk-overlap 150 --index-version v1`
+- V003 RAG query:
+  - `python -m app --rag --retriever.top_k 8 --retriever.min_score 0.3 --company "<name>" --question "<q>"`
+- Batch evaluation (any version):
+  - `python -m app --eval --dataset ./datasets/eval.jsonl --mlflow --run-name "exp_label" [--rag]`
+
+- V004 deep planning (interactive):
+  - `python -m app --deep --company "<name>" --question "<q>" --max-steps 20 --max-questions 3 --explain-plan`
+- V004 deep planning (non-interactive):
+  - `python -m app --deep --non-interactive --assume-missing conservative --company "<name>" --question "<q>"`
+
+## Troubleshooting
+
+- Auth errors: confirm `GOOGLE_API_KEY` and ADK version; re-login if using ADC.
+- Empty search results: check quotas; reduce steps; verify network.
+- RAG retrieval returns no context: ensure index exists in `RAG_INDEX_DIR`; re-run ingestion; lower `retriever.min_score`.
+- High latency: lower `top_k`, reduce steps, or raise timeouts.
+- Planner asks too many/poor questions: reduce `--max-questions`, switch `--assume-missing` policy to conservative, or run non-interactive mode; review plan trace.
+
+## Changelog
+
+- Added V003: Retrieval-Augmented Generation with ingestion and retriever configuration.
+ - Added V004: Deep planning with clarification dialog, planner budgets, and plan visualization.
+
+## Repository Structure
+
+This repository is organized to support multiple agent versions (V001–V004), shared tooling, evaluation, and artifacts.
+
+```
+app/
+  cli.py                 # Single CLI entrypoint for run/eval/ingest/deep
+  agents/                # Agent implementations per version
+  config/                # Layered YAML configs: defaults + version + profiles
+  prompts/               # Versioned agent/planner/judge prompts
+  tools/                 # Search, retriever, ingestion utilities
+  orchestration/         # Planner, dialogue, executor, blackboard (V004)
+  retrieval/             # Backends, chunking, embeddings, manifests (V003)
+  evaluation/            # Datasets, judges, metrics, runner, reporting
+  logging/               # Logging setup for structured logs
+data/
+  sources/               # Raw company docs (local only; respect licensing)
+  indexes/               # Vector indexes by company/version (gitignored)
+artifacts/
+  runs/                  # Run outputs (answers, contexts, judgments)
+```
+
+- See `ARCHITECTURE.md` for component diagrams and data flows.
+- For migrating from `brisk/`, mirror functionality into `app/` components.
+
+## Architecture Reference
+
+- High-level architecture and flows for V002 (Search), V003 (RAG), V004 (Deep Planning) are documented in `ARCHITECTURE.md`.
 
 ## Support and Community
 

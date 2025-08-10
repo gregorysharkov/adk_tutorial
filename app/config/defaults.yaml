@@ -1,0 +1,16 @@
+model: "gemini-1.5-pro-latest"
+temperature: 0.2
+top_p: 0.95
+max_output_tokens: 1024
+
+steps: 8
+retriever:
+  top_k: 8
+  min_score: 0.3
+planner:
+  max_steps: 20
+  max_parallel_tasks: 2
+  max_user_questions: 3
+  assume_missing: conservative
+
+

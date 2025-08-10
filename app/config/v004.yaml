@@ -1,0 +1,9 @@
+version: v004
+mode: deep
+planner:
+  max_steps: 20
+  max_parallel_tasks: 2
+  max_user_questions: 3
+  policy: balanced
+
+

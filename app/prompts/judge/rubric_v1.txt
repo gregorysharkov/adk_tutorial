@@ -1,0 +1,3 @@
+Judge on: correctness, groundedness, completeness, citation quality. Output pass/fail and rationale.
+
+

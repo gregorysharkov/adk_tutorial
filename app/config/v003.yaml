@@ -1,0 +1,12 @@
+version: v003
+mode: rag
+retriever:
+  top_k: 8
+  min_score: 0.3
+embedding:
+  model: text-embedding-004
+index:
+  backend: faiss
+  dir: data/indexes
+
+

@@ -1,0 +1,11 @@
+{
+  "plan": [
+    {"id": "step-1", "type": "retrieve_rag", "inputs": {"query": "${question}"}},
+    {"id": "step-2", "type": "search_web", "when": "if recall low"},
+    {"id": "step-3", "type": "ask_user", "when": "if ambiguity blocks synthesis"},
+    {"id": "step-4", "type": "synthesize"}
+  ],
+  "budgets": {"max_steps": ${max_steps}, "max_questions": ${max_questions}}
+}
+
+

@@ -1,0 +1,3 @@
+Synthesize an answer from the evidence blackboard. List assumptions and residual uncertainties. Include citations [n].
+
+
