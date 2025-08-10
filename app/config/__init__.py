@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 try:  # Optional dependency for now
     import yaml
@@ -10,7 +10,7 @@ except Exception:  # pragma: no cover - best effort stub
     yaml = None  # type: ignore
 
 
-def _read_yaml(path: Path) -> Dict[str, Any]:
+def _read_yaml(path: Path) -> dict[str, Any]:
     if not path.exists() or yaml is None:
         return {}
     with path.open("r", encoding="utf-8") as f:
@@ -18,11 +18,11 @@ def _read_yaml(path: Path) -> Dict[str, Any]:
 
 
 def load_config(
-    version: str, profile: str = "dev", overrides: Dict[str, Any] | None = None
-) -> Dict[str, Any]:
+    version: str, profile: str = "dev", overrides: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Load layered configuration: defaults -> version -> profile -> overrides."""
     root = Path(__file__).resolve().parent
-    cfg: Dict[str, Any] = {}
+    cfg: dict[str, Any] = {}
     cfg.update(_read_yaml(root / "defaults.yaml"))
     cfg.update(_read_yaml(root / f"{version}.yaml"))
     cfg.update(_read_yaml(root / "profiles" / f"{profile}.yaml"))

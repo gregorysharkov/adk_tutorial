@@ -1,4 +1,4 @@
-from typing import Dict, List, TypedDict
+from typing import TypedDict
 
 
 class Passage(TypedDict):
@@ -6,10 +6,10 @@ class Passage(TypedDict):
     source_uri: str
     chunk_id: str
     score: float
-    metadata: Dict[str, str]
+    metadata: dict[str, str]
 
 
-def retrieve(query: str, *, top_k: int = 8, min_score: float = 0.3) -> List[Passage]:
+def retrieve(query: str, *, top_k: int = 8, min_score: float = 0.3) -> list[Passage]:
     # Placeholder implementation
     return [
         {

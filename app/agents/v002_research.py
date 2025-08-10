@@ -1,10 +1,10 @@
-from typing import Any, Dict
+from typing import Any
 
 from app.agents.base import AgentResult
 
 
 class AgentV002:
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: dict[str, Any]):
         self.config = config
 
     def run(self, company: str, question: str) -> AgentResult:

@@ -1,6 +1,3 @@
-from typing import Optional
-
-
 def should_ask_user(ambiguity_score: float, *, threshold: float = 0.6) -> bool:
     return ambiguity_score >= threshold
 

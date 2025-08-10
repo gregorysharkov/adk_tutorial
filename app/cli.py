@@ -1,17 +1,17 @@
 import argparse
 import os
 import sys
-from typing import Any, Dict
+from typing import Any
 
 from dotenv import load_dotenv
-from app.config import load_config
-from app.logging.setup import setup_logging
+
 from app.agents.base import AgentResult
 from app.agents.v001_minimal import AgentV001
 from app.agents.v002_research import AgentV002
 from app.agents.v003_rag import AgentV003
 from app.agents.v004_deep_planner import AgentV004
-
+from app.config import load_config
+from app.logging.setup import setup_logging
 
 AGENT_BY_VERSION = {
     "v001": AgentV001,
@@ -72,8 +72,8 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def parse_overrides(pairs: list[str]) -> Dict[str, Any]:
-    overrides: Dict[str, Any] = {}
+def parse_overrides(pairs: list[str]) -> dict[str, Any]:
+    overrides: dict[str, Any] = {}
     for pair in pairs:
         if "=" not in pair:
             continue

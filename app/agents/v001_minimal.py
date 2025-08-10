@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
-from app.agents.base import AgentResult, IAgent
+from app.agents.base import AgentResult
 
 
 class AgentV001:
@@ -14,7 +14,7 @@ class AgentV001:
     the user input with company and question. Returns the model's text.
     """
 
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: dict[str, Any]):
         self.config = config
         self.model_name: str = str(self.config.get("model", "gemini-1.5-pro-latest"))
         self.temperature: float = float(self.config.get("temperature", 0.2))

@@ -1,6 +1,7 @@
 import json
-from google.genai import types
+
 from google.adk.runners import Runner
+from google.genai import types
 
 
 async def call_agent_async(query: str, runner: Runner, user_id: str, session_id: str):

@@ -1,16 +1,16 @@
-from typing import Any, Dict, List, TypedDict
+from typing import Any, TypedDict
 
 
 class PlanStep(TypedDict):
     id: str
     type: str  # retrieve_rag | search_web | ask_user | read | synthesize
-    inputs: Dict[str, Any] | None
+    inputs: dict[str, Any] | None
     when: str | None
 
 
 def make_plan(
     question: str, *, max_steps: int = 20, max_questions: int = 3
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     return {
         "plan": [
             {

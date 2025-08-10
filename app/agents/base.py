@@ -1,17 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Protocol
+from typing import Any, Protocol
 
 
 @dataclass
 class AgentResult:
     answer: str
-    citations: List[str] = field(default_factory=list)
-    assumptions: List[str] = field(default_factory=list)
+    citations: list[str] = field(default_factory=list)
+    assumptions: list[str] = field(default_factory=list)
     trace_id: str | None = None
 
 
 class IAgent(Protocol):
-    config: Dict[str, Any]
+    config: dict[str, Any]
 
     def run(
         self, company: str, question: str

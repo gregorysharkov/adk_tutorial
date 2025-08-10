@@ -1,6 +1,6 @@
-from typing import Any, Dict, List
+from typing import Any
 
 
-def execute_plan(plan: Dict[str, Any]) -> Dict[str, Any]:
-    steps: List[Dict[str, Any]] = plan.get("plan", [])
+def execute_plan(plan: dict[str, Any]) -> dict[str, Any]:
+    steps: list[dict[str, Any]] = plan.get("plan", [])
     return {"status": "ok", "steps_executed": [s.get("id") for s in steps]}

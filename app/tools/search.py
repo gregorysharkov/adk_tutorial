@@ -1,4 +1,4 @@
-from typing import Dict, List, TypedDict
+from typing import TypedDict
 
 
 class SearchResult(TypedDict):
@@ -9,7 +9,7 @@ class SearchResult(TypedDict):
 
 def web_search(
     query: str, *, timeout_s: float = 10.0, max_results: int = 5
-) -> List[SearchResult]:
+) -> list[SearchResult]:
     # Placeholder implementation
     return [
         {

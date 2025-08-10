@@ -1,7 +1,4 @@
-from typing import Optional
-
-
-def say_hello(name: Optional[str] = None) -> str:
+def say_hello(name: str | None = None) -> str:
     """
     Provides a simple greeting. If name is provided, it will be used
 
@@ -17,7 +14,7 @@ def say_hello(name: Optional[str] = None) -> str:
     return "Hello! It's great to meet you."
 
 
-def say_goodbye(name: Optional[str] = None) -> str:
+def say_goodbye(name: str | None = None) -> str:
     """
     Provides a simple goodbye message. If name is provided, it will be used
     """

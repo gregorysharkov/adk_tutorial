@@ -1,15 +1,15 @@
-from typing import Any, Dict, List
+from typing import Any
 
 from app.agents.base import AgentResult
 
 
 class AgentV003:
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: dict[str, Any]):
         self.config = config
 
     def run(self, company: str, question: str) -> AgentResult:
         # Placeholder: pretend we retrieved k passages
-        retrieved: List[str] = [
+        retrieved: list[str] = [
             "doc://kb/acme/overview.md#chunk-1",
             "doc://kb/acme/financials.pdf#chunk-12",
         ]
