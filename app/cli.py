@@ -3,7 +3,9 @@ import os
 import sys
 from typing import Any, Dict
 
+from dotenv import load_dotenv
 from app.config import load_config
+from app.logging.setup import setup_logging
 from app.agents.base import AgentResult
 from app.agents.v001_minimal import AgentV001
 from app.agents.v002_research import AgentV002
@@ -81,9 +83,13 @@ def parse_overrides(pairs: list[str]) -> Dict[str, Any]:
 
 
 def main() -> int:
+    # Load environment variables from .env if present
+    load_dotenv()
+
     args = parse_args()
     overrides = parse_overrides(args.set)
     cfg = load_config(args.version, args.profile, overrides)
+    setup_logging(cfg.get("log_level", "INFO"))
 
     # Mode dispatch (stubs for now)
     if args.ingest:
@@ -94,7 +100,11 @@ def main() -> int:
         print("[EVAL] Batch evaluation requested. Implement in app.evaluation.runner.")
         return 0
 
-    # Interactive run
+    # Interactive run (prompt for inputs if not provided)
+    if not args.company:
+        args.company = input("Company: ").strip()
+    if not args.question:
+        args.question = input("Question: ").strip()
     agent_cls = AGENT_BY_VERSION.get(args.version)
     if not agent_cls:
         print(f"Unsupported version: {args.version}", file=sys.stderr)

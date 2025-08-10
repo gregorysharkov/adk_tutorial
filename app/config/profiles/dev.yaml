@@ -1,3 +1,4 @@
+log_level: INFO
 profile: dev
 logging: debug
 
