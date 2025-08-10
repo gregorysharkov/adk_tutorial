@@ -126,3 +126,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/ 
+mlflow_eval_outputs/
+mlruns/

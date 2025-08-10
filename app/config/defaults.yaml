@@ -14,3 +14,11 @@ planner:
   assume_missing: conservative
 
 
+# MLflow configuration (local by default)
+mlflow:
+  enabled: true
+  # If not set, MLflow default local directory will be used (./mlruns)
+  tracking_uri: ""
+  experiment: "adk_tutorial"
+  run_name: ""
+

@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
@@ -11,6 +12,7 @@ from app.agents.v002_research import AgentV002
 from app.agents.v003_rag import AgentV003
 from app.agents.v004_deep_planner import AgentV004
 from app.config import load_config
+from app.evaluation.runner import run_evaluation
 from app.logging.setup import setup_logging
 
 AGENT_BY_VERSION = {
@@ -83,8 +85,8 @@ def parse_overrides(pairs: list[str]) -> dict[str, Any]:
 
 
 def main() -> int:
-    # Load environment variables from .env if present
-    load_dotenv()
+    # Load environment variables from project root .env explicitly
+    load_dotenv(dotenv_path=Path(__file__).resolve().parents[1] / ".env", override=True)
 
     args = parse_args()
     overrides = parse_overrides(args.set)
@@ -97,7 +99,15 @@ def main() -> int:
         return 0
 
     if args.eval:
-        print("[EVAL] Batch evaluation requested. Implement in app.evaluation.runner.")
+        if not args.dataset:
+            print("[EVAL] --dataset path is required for evaluation", file=sys.stderr)
+            return 1
+        run_evaluation(
+            dataset_path=args.dataset,
+            version=args.version,
+            config=cfg,
+            run_name=args.run_name or None,
+        )
         return 0
 
     # Interactive run (prompt for inputs if not provided)
