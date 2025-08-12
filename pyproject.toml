@@ -21,7 +21,9 @@ torch = "^2.3.0"
 textstat = "^0.7.3"
 
 [tool.poetry.scripts]
-# Removed format scripts since app/format.py has been deleted
+transform-companies = "app.scratchfiles.transform_companies:main"
+test-transform = "app.scratchfiles.test_transformation:test_transformation"
+adk = "app.cli:main"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.12.8"
