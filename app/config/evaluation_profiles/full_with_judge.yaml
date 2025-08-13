@@ -1,0 +1,30 @@
+# Full Evaluation Profile with Judge
+# Comprehensive evaluation with LLM-as-judge enabled
+
+# Inherit from base evaluation config
+_extends: "../evaluation.yaml"
+
+# Full evaluation settings
+agent:
+  version: "v001"
+  max_output_tokens: 1024  # Full responses
+
+judge:
+  enabled: true
+  model: "gemini-1.5-pro-latest"
+  temperature: 0.0  # Factual judging
+
+datasets:
+  use_combined: true  # Use both datasets
+
+execution:
+  max_workers: 8  # Full parallelization
+  batch_size: 100
+
+mlflow:
+  enabled: true
+  experiment: "adk_tutorial_full_eval"
+  run_name: "eval-v001-full-with-judge"
+
+output:
+  include_judge_rationales: true

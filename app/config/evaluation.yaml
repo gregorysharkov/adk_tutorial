@@ -1,0 +1,47 @@
+# Evaluation Configuration
+# This file contains settings for running evaluations
+
+# Agent configuration for evaluation
+agent:
+  version: "v001"  # Default agent version to evaluate
+  model: "gemini-1.5-pro-latest"
+  temperature: 0.2
+  top_p: 0.95
+  max_output_tokens: 1024
+
+# LLM-as-Judge configuration
+judge:
+  enabled: true  # Enable/disable per-item LLM judging
+  model: "gemini-1.5-pro-latest"  # Model to use for judging
+  temperature: 0.0  # Low temperature for factual judging
+  max_output_tokens: 256  # Short judge responses
+
+# Dataset configuration
+datasets:
+  # Use combined datasets (original + transformed) by default
+  use_combined: true
+  
+  # Individual dataset paths (used if use_combined: false)
+  original: "data/datasets/company_qa_eval_100.jsonl"
+  transformed: "data/datasets/transformed_companies_qa.jsonl"
+  
+  # Custom dataset path (overrides above if specified)
+  custom: null
+
+# MLflow configuration for evaluation
+mlflow:
+  enabled: true
+  tracking_uri: ""  # Empty for local MLflow
+  experiment: "adk_tutorial_eval"
+  run_name: ""  # Auto-generated if empty
+  
+# Evaluation execution settings
+execution:
+  max_workers: 20  # Maximum parallel workers
+  batch_size: 100  # Process items in batches
+  
+# Output configuration
+output:
+  save_results: true
+  results_dir: "mlflow_eval_outputs"
+  include_judge_rationales: true  # Include judge reasoning in results

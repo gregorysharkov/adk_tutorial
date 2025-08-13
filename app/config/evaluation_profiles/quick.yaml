@@ -1,0 +1,24 @@
+# Quick Evaluation Profile
+# Fast evaluation with minimal settings for testing
+
+# Inherit from base evaluation config
+_extends: "../evaluation.yaml"
+
+# Override for quick testing
+agent:
+  version: "v001"
+  max_output_tokens: 256  # Shorter responses for speed
+
+judge:
+  enabled: false  # Disable judge for speed
+
+datasets:
+  use_combined: false  # Use only original dataset for speed
+  custom: "data/datasets/test_transformed_companies.jsonl"  # Small test dataset
+
+execution:
+  max_workers: 4  # Fewer workers for testing
+  batch_size: 50
+
+mlflow:
+  enabled: false  # Disable MLflow for quick testing

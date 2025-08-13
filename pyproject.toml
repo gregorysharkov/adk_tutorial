@@ -19,6 +19,8 @@ evaluate = "^0.4.3"
 transformers = "^4.42.0"
 torch = "^2.3.0"
 textstat = "^0.7.3"
+requests = "^2.32.4"
+beautifulsoup4 = "^4.13.4"
 
 [tool.poetry.scripts]
 transform-companies = "app.scratchfiles.transform_companies:main"

@@ -1,0 +1,700 @@
+{
+    "id": "q001",
+    "company": "Google",
+    "question": "What does the company do?",
+    "expected_answer": "Google (Alphabet) is a technology company best known for web search and advertising, and it also develops Android, Chrome, YouTube, and Google Cloud services.",
+    "references": [],
+}
+{
+    "id": "q002",
+    "company": "Google",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Google Search, YouTube, and Android (plus Chrome and Google Cloud) are flagship offerings.",
+    "references": [],
+}
+{
+    "id": "q003",
+    "company": "Google",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Technology and internet services, including online advertising, cloud computing, and consumer software.",
+    "references": [],
+}
+{
+    "id": "q004",
+    "company": "Google",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "The majority of revenue comes from advertising on Google properties and the ad network; Google Cloud and other subscriptions contribute a growing share.",
+    "references": [],
+}
+{
+    "id": "q005",
+    "company": "Apple",
+    "question": "What does the company do?",
+    "expected_answer": "Apple designs and sells consumer electronics, software, and services, including iPhone, Mac, iPad, and a growing services business.",
+    "references": [],
+}
+{
+    "id": "q006",
+    "company": "Apple",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "iPhone, Mac, and Services (e.g., App Store, iCloud, Apple Music) are flagship lines.",
+    "references": [],
+}
+{
+    "id": "q007",
+    "company": "Apple",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Consumer electronics, software, and digital services.",
+    "references": [],
+}
+{
+    "id": "q008",
+    "company": "Apple",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Hardware device sales (especially iPhone) and subscription/services revenue (App Store, iCloud, media).",
+    "references": [],
+}
+{
+    "id": "q009",
+    "company": "Microsoft",
+    "question": "What does the company do?",
+    "expected_answer": "Microsoft develops software, cloud services, and devices, including Windows, Microsoft 365, Azure, and Xbox.",
+    "references": [],
+}
+{
+    "id": "q010",
+    "company": "Microsoft",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Windows, Microsoft 365 (Office), and Azure are flagship offerings (with Xbox and LinkedIn also notable).",
+    "references": [],
+}
+{
+    "id": "q011",
+    "company": "Microsoft",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Enterprise and consumer technology: software, cloud computing, and hardware.",
+    "references": [],
+}
+{
+    "id": "q012",
+    "company": "Microsoft",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Cloud services (Azure), software subscriptions (Microsoft 365), enterprise licensing, and gaming/content.",
+    "references": [],
+}
+{
+    "id": "q013",
+    "company": "Amazon",
+    "question": "What does the company do?",
+    "expected_answer": "Amazon operates a global e-commerce marketplace, runs Amazon Web Services (AWS), and offers digital media and devices.",
+    "references": [],
+}
+{
+    "id": "q014",
+    "company": "Amazon",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Amazon.com marketplace, AWS, and Prime (plus devices like Kindle and Echo).",
+    "references": [],
+}
+{
+    "id": "q015",
+    "company": "Amazon",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "E-commerce, cloud computing, and digital services.",
+    "references": [],
+}
+{
+    "id": "q016",
+    "company": "Amazon",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Online stores and third-party seller services, AWS cloud services, and advertising.",
+    "references": [],
+}
+{
+    "id": "q017",
+    "company": "Meta",
+    "question": "What does the company do?",
+    "expected_answer": "Meta builds social platforms (Facebook, Instagram, WhatsApp) and invests in AR/VR hardware and software.",
+    "references": [],
+}
+{
+    "id": "q018",
+    "company": "Meta",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Facebook, Instagram, and WhatsApp (with Quest hardware for VR).",
+    "references": [],
+}
+{
+    "id": "q019",
+    "company": "Meta",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Social media, online advertising, and AR/VR technology.",
+    "references": [],
+}
+{
+    "id": "q020",
+    "company": "Meta",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Digital advertising across Facebook and Instagram drives most revenue; hardware and other services contribute a smaller portion.",
+    "references": [],
+}
+{
+    "id": "q021",
+    "company": "OpenAI",
+    "question": "What does the company do?",
+    "expected_answer": "OpenAI develops and deploys advanced AI models and tools for natural language, vision, and multimodal tasks, including ChatGPT and APIs for developers.",
+    "references": [],
+}
+{
+    "id": "q022",
+    "company": "OpenAI",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "ChatGPT, the OpenAI API (GPT-series models), and enterprise offerings (e.g., ChatGPT Enterprise).",
+    "references": [],
+}
+{
+    "id": "q023",
+    "company": "OpenAI",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Artificial intelligence research and applied AI services.",
+    "references": [],
+}
+{
+    "id": "q024",
+    "company": "OpenAI",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "API usage fees, enterprise subscriptions, and ChatGPT consumer subscriptions.",
+    "references": [],
+}
+{
+    "id": "q025",
+    "company": "Nvidia",
+    "question": "What does the company do?",
+    "expected_answer": "Nvidia designs GPUs and AI computing platforms used in data centers, gaming, and professional visualization.",
+    "references": [],
+}
+{
+    "id": "q026",
+    "company": "Nvidia",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Data center GPUs/platforms, GeForce gaming GPUs, and CUDA software ecosystem.",
+    "references": [],
+}
+{
+    "id": "q027",
+    "company": "Nvidia",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Semiconductors and accelerated computing/AI.",
+    "references": [],
+}
+{
+    "id": "q028",
+    "company": "Nvidia",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Data center/AI computing products, gaming GPUs, and professional visualization.",
+    "references": [],
+}
+{
+    "id": "q029",
+    "company": "Tesla",
+    "question": "What does the company do?",
+    "expected_answer": "Tesla designs and manufactures electric vehicles and energy products, and develops software like Autopilot/FSD.",
+    "references": [],
+}
+{
+    "id": "q030",
+    "company": "Tesla",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Model 3 and Model Y vehicles, and Powerwall/energy storage (with Model S/X and software features).",
+    "references": [],
+}
+{
+    "id": "q031",
+    "company": "Tesla",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Automotive (EVs) and energy generation/storage.",
+    "references": [],
+}
+{
+    "id": "q032",
+    "company": "Tesla",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Vehicle sales and related services; energy generation/storage; software and regulatory credits contribute as well.",
+    "references": [],
+}
+{
+    "id": "q033",
+    "company": "Netflix",
+    "question": "What does the company do?",
+    "expected_answer": "Netflix operates a global video streaming service and produces/distributes original content.",
+    "references": [],
+}
+{
+    "id": "q034",
+    "company": "Netflix",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Streaming service, original content (Netflix Originals), and ad-supported tier (where available).",
+    "references": [],
+}
+{
+    "id": "q035",
+    "company": "Netflix",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Media and entertainment, streaming video on demand.",
+    "references": [],
+}
+{
+    "id": "q036",
+    "company": "Netflix",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Subscription revenue and advertising revenue from ad-supported plans.",
+    "references": [],
+}
+{
+    "id": "q037",
+    "company": "Adobe",
+    "question": "What does the company do?",
+    "expected_answer": "Adobe provides creative and document software and services, including Creative Cloud and Acrobat.",
+    "references": [],
+}
+{
+    "id": "q038",
+    "company": "Adobe",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Photoshop, Acrobat, and Adobe Premiere Pro (with Illustrator and Experience Cloud also notable).",
+    "references": [],
+}
+{
+    "id": "q039",
+    "company": "Adobe",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Software—creative tools, document management, and digital experience.",
+    "references": [],
+}
+{
+    "id": "q040",
+    "company": "Adobe",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Subscription revenue from Creative Cloud, Document Cloud, and Experience Cloud offerings.",
+    "references": [],
+}
+{
+    "id": "q041",
+    "company": "IBM",
+    "question": "What does the company do?",
+    "expected_answer": "IBM offers consulting and hybrid cloud/software solutions, with strengths in enterprise IT and mainframe systems.",
+    "references": [],
+}
+{
+    "id": "q042",
+    "company": "IBM",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Consulting services, IBM zSystems/mainframe, and Red Hat OpenShift-based hybrid cloud software.",
+    "references": [],
+}
+{
+    "id": "q043",
+    "company": "IBM",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Enterprise technology and consulting services.",
+    "references": [],
+}
+{
+    "id": "q044",
+    "company": "IBM",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Consulting services, software subscriptions/licenses, and infrastructure systems.",
+    "references": [],
+}
+{
+    "id": "q045",
+    "company": "Intel",
+    "question": "What does the company do?",
+    "expected_answer": "Intel designs and manufactures processors and semiconductor products for PCs, data centers, and other markets.",
+    "references": [],
+}
+{
+    "id": "q046",
+    "company": "Intel",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Client PC processors, data center/server processors, and a growing foundry services business.",
+    "references": [],
+}
+{
+    "id": "q047",
+    "company": "Intel",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Semiconductors and computing hardware.",
+    "references": [],
+}
+{
+    "id": "q048",
+    "company": "Intel",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Client computing, data center products, and related silicon/platform sales; foundry services are emerging.",
+    "references": [],
+}
+{
+    "id": "q049",
+    "company": "Salesforce",
+    "question": "What does the company do?",
+    "expected_answer": "Salesforce provides a cloud-based CRM platform and related enterprise applications.",
+    "references": [],
+}
+{
+    "id": "q050",
+    "company": "Salesforce",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Sales Cloud, Service Cloud, and Marketing Cloud (with Slack and Tableau as strategic products).",
+    "references": [],
+}
+{
+    "id": "q051",
+    "company": "Salesforce",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Enterprise software (SaaS) for customer relationship management and analytics.",
+    "references": [],
+}
+{
+    "id": "q052",
+    "company": "Salesforce",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Subscription and support revenue from cloud applications and platforms; professional services contribute modestly.",
+    "references": [],
+}
+{
+    "id": "q053",
+    "company": "Oracle",
+    "question": "What does the company do?",
+    "expected_answer": "Oracle develops database software, enterprise applications, and cloud infrastructure services.",
+    "references": [],
+}
+{
+    "id": "q054",
+    "company": "Oracle",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Oracle Database, Oracle Cloud Infrastructure (OCI), and Fusion Cloud Applications.",
+    "references": [],
+}
+{
+    "id": "q055",
+    "company": "Oracle",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Enterprise software and cloud services.",
+    "references": [],
+}
+{
+    "id": "q056",
+    "company": "Oracle",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Cloud services and license support, cloud infrastructure usage, and applications subscriptions; hardware is smaller.",
+    "references": [],
+}
+{
+    "id": "q057",
+    "company": "Uber",
+    "question": "What does the company do?",
+    "expected_answer": "Uber provides a platform for ride-hailing, food delivery (Uber Eats), and freight logistics.",
+    "references": [],
+}
+{
+    "id": "q058",
+    "company": "Uber",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Mobility (rides), Uber Eats (delivery), and Uber Freight.",
+    "references": [],
+}
+{
+    "id": "q059",
+    "company": "Uber",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Transportation, delivery logistics, and marketplaces.",
+    "references": [],
+}
+{
+    "id": "q060",
+    "company": "Uber",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Commissions and fees from mobility and delivery transactions; freight services revenue.",
+    "references": [],
+}
+{
+    "id": "q061",
+    "company": "Airbnb",
+    "question": "What does the company do?",
+    "expected_answer": "Airbnb operates a marketplace for short-term stays and experiences, connecting hosts and guests.",
+    "references": [],
+}
+{
+    "id": "q062",
+    "company": "Airbnb",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Stays marketplace, Experiences, and related host tools/services.",
+    "references": [],
+}
+{
+    "id": "q063",
+    "company": "Airbnb",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Travel and hospitality marketplaces.",
+    "references": [],
+}
+{
+    "id": "q064",
+    "company": "Airbnb",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Service fees from bookings (guest and host fees) and experiences.",
+    "references": [],
+}
+{
+    "id": "q065",
+    "company": "Spotify",
+    "question": "What does the company do?",
+    "expected_answer": "Spotify offers music and podcast streaming across devices with personalization and recommendations.",
+    "references": [],
+}
+{
+    "id": "q066",
+    "company": "Spotify",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Premium subscription, ad-supported tier, and podcasts/audiobooks features.",
+    "references": [],
+}
+{
+    "id": "q067",
+    "company": "Spotify",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Digital music/audio streaming and media.",
+    "references": [],
+}
+{
+    "id": "q068",
+    "company": "Spotify",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Premium subscriptions and advertising revenue in the free tier.",
+    "references": [],
+}
+{
+    "id": "q069",
+    "company": "Shopify",
+    "question": "What does the company do?",
+    "expected_answer": "Shopify provides an e-commerce platform for merchants to build, manage, and grow online businesses.",
+    "references": [],
+}
+{
+    "id": "q070",
+    "company": "Shopify",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Online Store platform, Payments/Shopify Payments, and Shopify POS (with logistics/Shop app as ecosystem elements).",
+    "references": [],
+}
+{
+    "id": "q071",
+    "company": "Shopify",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "E-commerce platforms and merchant services.",
+    "references": [],
+}
+{
+    "id": "q072",
+    "company": "Shopify",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Subscription revenue and Merchant Solutions (payments, transaction fees, ancillary services).",
+    "references": [],
+}
+{
+    "id": "q073",
+    "company": "PayPal",
+    "question": "What does the company do?",
+    "expected_answer": "PayPal provides digital payments services for consumers and merchants, including PayPal, Braintree, and Venmo.",
+    "references": [],
+}
+{
+    "id": "q074",
+    "company": "PayPal",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "PayPal digital wallet/checkout, Braintree for merchants, and Venmo peer-to-peer payments.",
+    "references": [],
+}
+{
+    "id": "q075",
+    "company": "PayPal",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Digital payments and financial technology.",
+    "references": [],
+}
+{
+    "id": "q076",
+    "company": "PayPal",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Transaction fees from processing payments, value-added merchant services, and consumer fees.",
+    "references": [],
+}
+{
+    "id": "q077",
+    "company": "Stripe",
+    "question": "What does the company do?",
+    "expected_answer": "Stripe provides payments infrastructure and developer tools for online commerce.",
+    "references": [],
+}
+{
+    "id": "q078",
+    "company": "Stripe",
+    "question": "Name 3 flagship products or services.",
+    "expected_answer": "Payments, Billing (subscriptions/invoicing), and Connect (marketplaces/payouts).",
+    "references": [],
+}
+{
+    "id": "q079",
+    "company": "Stripe",
+    "question": "Which industry does the company operate in?",
+    "expected_answer": "Financial technology and payments infrastructure.",
+    "references": [],
+}
+{
+    "id": "q080",
+    "company": "Stripe",
+    "question": "What are its primary revenue streams?",
+    "expected_answer": "Processing fees on transactions and fees for additional financial services.",
+    "references": [],
+}
+{
+    "id": "q081",
+    "company": "Google",
+    "question": "What is the weather like?",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q082",
+    "company": "Apple",
+    "question": "How do I bake a cake?",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q083",
+    "company": "Microsoft",
+    "question": "What is 2+2?",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q084",
+    "company": "Amazon",
+    "question": "Should I buy a house now?",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q085",
+    "company": "Meta",
+    "question": "What time is it in Tokyo?",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q086",
+    "company": "OpenAI",
+    "question": "How tall is Mount Everest?",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q087",
+    "company": "Nvidia",
+    "question": "Who won the last World Cup?",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q088",
+    "company": "Tesla",
+    "question": "What is the capital of France?",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q089",
+    "company": "Netflix",
+    "question": "Write a poem about the moon.",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q090",
+    "company": "Adobe",
+    "question": "Translate 'hello' to Spanish.",
+    "expected_answer": "Irrelevant: the question is not about the company.",
+    "references": [],
+}
+{
+    "id": "q091",
+    "company": "IBM",
+    "question": "Does the company run the government?",
+    "expected_answer": "No; this is a misleading or unfounded claim. The company does not run the government.",
+    "references": [],
+}
+{
+    "id": "q092",
+    "company": "Intel",
+    "question": "Is the company responsible for all internet outages?",
+    "expected_answer": "No; that is an exaggerated claim and not accurate.",
+    "references": [],
+}
+{
+    "id": "q093",
+    "company": "Salesforce",
+    "question": "Does the company own the entire internet?",
+    "expected_answer": "No; the internet is not owned by a single company.",
+    "references": [],
+}
+{
+    "id": "q094",
+    "company": "Oracle",
+    "question": "Can the company guarantee stock market profits?",
+    "expected_answer": "No; companies cannot guarantee investment profits.",
+    "references": [],
+}
+{
+    "id": "q095",
+    "company": "Uber",
+    "question": "Is the company a country?",
+    "expected_answer": "No; it is a private corporation, not a sovereign state.",
+    "references": [],
+}
+{
+    "id": "q096",
+    "company": "Airbnb",
+    "question": "Are all hosts employees of the company?",
+    "expected_answer": "No; hosts are independent and use the platform; they are not employees.",
+    "references": [],
+}
+{
+    "id": "q097",
+    "company": "Spotify",
+    "question": "Does the company produce all music on the platform?",
+    "expected_answer": "No; most content comes from artists and labels; Spotify licenses and distributes.",
+    "references": [],
+}
+{
+    "id": "q098",
+    "company": "Shopify",
+    "question": "Does the company own every store on its platform?",
+    "expected_answer": "No; merchants own their stores and use Shopify's tools.",
+    "references": [],
+}
+{
+    "id": "q099",
+    "company": "PayPal",
+    "question": "Does the company issue national currency?",
+    "expected_answer": "No; it processes digital payments; national currency issuance is handled by governments/central banks.",
+    "references": [],
+}
+{
+    "id": "q100",
+    "company": "Stripe",
+    "question": "Can the company read my mind?",
+    "expected_answer": "No; that is impossible and not related to the company's services.",
+    "references": [],
+}

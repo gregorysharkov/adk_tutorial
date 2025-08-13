@@ -142,7 +142,7 @@ def _load_evaluation_config(profile_name: str) -> dict[str, Any]:
             f"Base evaluation config not found. Tried: {[str(p) for p in possible_paths]}"
         )
 
-    with open(base_config_path, "r") as f:
+    with open(base_config_path) as f:
         base_config = yaml.safe_load(f)
 
     # Load profile if specified
@@ -158,7 +158,7 @@ def _load_evaluation_config(profile_name: str) -> dict[str, Any]:
         if not profile_path.exists():
             raise FileNotFoundError(f"Evaluation profile not found: {profile_path}")
 
-        with open(profile_path, "r") as f:
+        with open(profile_path) as f:
             profile_config = yaml.safe_load(f)
 
         # Merge profile with base config (profile overrides base)
